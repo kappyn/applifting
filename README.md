@@ -21,5 +21,5 @@ Multiple containers will start. The API will be available at [`http://localhost:
 
 To run tests in a separate, non-persistent container, run the following script:
 ```Bash
-bash run-tests
+bash run-tests clean
 ```

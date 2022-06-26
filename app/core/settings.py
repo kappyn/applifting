@@ -1,3 +1,4 @@
+import logging
 from os import environ
 from typing import Any, Dict, Final, List
 
@@ -16,3 +17,7 @@ class Settings(BaseConfig):
         environ.get("OFFERS_REFRESH_DELAY_SECONDS", 60)
     )
     DB_ASYNC_CONNECTION_STR: str = environ.get("DB_ASYNC_CONNECTION_STR", "")
+
+    logging.getLogger().setLevel(logging.DEBUG)
+    FORMAT = "%(asctime)s %(message)s"
+    logging.basicConfig(format=FORMAT)

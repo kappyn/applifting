@@ -1,3 +1,4 @@
+import logging
 from typing import Any, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -80,8 +81,11 @@ class ProductCRUD:
             else:
                 await self.offer_crud.patch(offer.id, offer)
                 patches += 1
-        print(
-            f"Updating offers for project: {product_id} ~ {additions} added, {patches} edited"
+        logging.debug(
+            "Updating offers for project: %s ~ %s added, %s edited",
+            product_id,
+            additions,
+            patches,
         )
         return True
 

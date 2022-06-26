@@ -1,3 +1,4 @@
+import logging
 from functools import lru_cache
 from typing import Dict, List
 
@@ -32,7 +33,7 @@ class OfferService:
             return False
         data = response.json()
         self.access_token = data["access_token"]
-        print(f"access-token received: {self.access_token}")
+        logging.debug("Received access-token %s", self.access_token)
         return True
 
     async def register_product(self, product: Product) -> StatusMessage:
@@ -67,9 +68,8 @@ class OfferService:
         async with get_async_session_cm() as session:
             products_crud = ProductCRUD(session)
             products_list = await products_crud.get_all()
-            print(products_list)
             for product in products_list:
                 offers = await self.fetch_product_offers(product.id)
                 await products_crud.update_offers(product.id, offers)
-        print("Offers refreshed.")
+        logging.debug("Offers refreshed.")
         return True
