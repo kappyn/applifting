@@ -1,6 +1,11 @@
 # Applifting Task
 
 ## Development
+0. Clone the repository:
+```Bash
+git clone git@github.com:kappyn/applifting-task.git
+```
+
 1. Setup the environment:
 ```Bash
 python -m venv venv
