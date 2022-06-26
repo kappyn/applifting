@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: test_db
+    image: postgres:13-alpine
+    env_file: .env
+    healthcheck:
+      test: pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    ports:
+      - 127.0.0.1:5432:5432
+
+  tests:
+    container_name: testing
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    env_file: .env
+    ports:
+      - 9000:9000
+    environment:
+      - API_HOST=api:8000
+    depends_on:
+      db:
+        condition: service_healthy
+    command: bash -c "alembic upgrade head && python -m pytest --verbose --no-header"

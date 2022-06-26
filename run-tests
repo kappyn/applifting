@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo 'Running tests...'
+
+if [ "$1" == "clean" ]; then
+    docker-compose -f docker-compose.test.yml down -v --remove-orphans
+fi
+docker-compose -f docker-compose.test.yml build &&
+docker-compose -f docker-compose.test.yml run tests

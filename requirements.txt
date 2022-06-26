@@ -1,0 +1,13 @@
+fastapi==0.78.0
+fastapi-utils==0.2.1
+sqlmodel==0.0.6
+asyncpg==0.25.0
+sqlalchemy==1.4.35
+sqlalchemy-utils==0.38.2
+alembic==1.8.0
+python-dotenv==0.20.0
+pydantic==1.9.1
+httpx==0.23.0
+uvicorn==0.17.6
+pytest==7.1.2
+pytest-asyncio==0.18.3
