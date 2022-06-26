@@ -13,6 +13,7 @@ from app.offers.crud import OfferCRUD
 class ProductCRUD:
     def __init__(self, session: AsyncSession):
         self.session = session
+        self.offer_crud = OfferCRUD(session=self.session)
 
     async def create(self, data: ProductCreate) -> Product:
         values = data.dict()
@@ -61,3 +62,36 @@ class ProductCRUD:
         await self.session.delete(product)
         await self.session.commit()
         return True
+
+    async def get_offers(self, product_id: int) -> List[Offer]:
+        product = await self.get(product_id)
+        return product.offers
+
+    async def update_offers(self, product_id: int, offers: List[Offer]) -> bool:
+        additions = patches = 0
+        for offer in offers:
+            statement = select(Offer).where(and_(Offer.id == offer.id))
+            results = await self.session.execute(statement=statement)
+            query = results.scalar_one_or_none()
+            offer.product_id = product_id
+            if query is None:
+                await self.offer_crud.create(offer)
+                additions += 1
+            else:
+                await self.offer_crud.patch(offer.id, offer)
+                patches += 1
+        print(
+            f"Updating offers for project: {product_id} ~ {additions} added, {patches} edited"
+        )
+        return True
+
+    # async def delete_offers(
+    #     self,
+    #     product_id: Optional[int] = None,
+    # ) -> List[Offer]:
+    #     statement = delete(Offer)
+    #     if product_id is not None:
+    #         statement = delete(Offer).where(Offer.product_id == product_id)
+    #     await self.session.execute(statement=statement)
+    #     await self.session.commit()
+    #     return await self.get_offers(product_id)
