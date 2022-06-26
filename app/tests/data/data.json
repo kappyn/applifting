@@ -1,0 +1,217 @@
+{
+  "initial_data": {
+    "product": {
+      "id": 1,
+      "name": "Benzinová sekačka Dosquarna",
+      "description": "Nejlepší sekačka na trhu. TLDR"
+    }
+  },
+  "case_create": {
+    "payload": {
+      "name": "Benzinová sekačka Dosquarna",
+      "description": "Nejlepší sekačka na trhu. TLDR"
+    },
+    "expected": {
+      "name": "Benzinová sekačka Dosquarna",
+      "description": "Nejlepší sekačka na trhu. TLDR"
+    }
+  },
+  "case_get": {
+    "expected": {
+      "id": 1,
+      "name": "Benzinová sekačka Dosquarna",
+      "description": "Nejlepší sekačka na trhu. TLDR"
+    }
+  },
+  "case_patch": {
+    "payload": {
+      "name": "Rotační benzinová řetězová pila od Dosquarna",
+      "description": "Nejlepší sekačka na trhu. TLDR"
+    },
+    "expected": {
+      "name": "Rotační benzinová řetězová pila od Dosquarna",
+      "description": "Nejlepší sekačka na trhu. TLDR"
+    }
+  },
+  "case_delete": {
+    "expected": {
+      "message": "Product deleted successfully."
+    }
+  },
+  "case_add_offers": {
+    "payload": {
+      "product": {
+        "name": "Benzinová sekačka Dosquarna",
+        "description": "Nejlepší sekačka na trhu. TLDR"
+      },
+      "offers": [
+        {
+          "id": 1,
+          "price": 150,
+          "items_in_stock": 5
+        },
+        {
+          "id": 2,
+          "price": 20,
+          "items_in_stock": 5
+        },
+        {
+          "id": 3,
+          "price": 666,
+          "items_in_stock": 5
+        }
+      ]
+    }
+  },
+  "case_update_offers": {
+    "payload": {
+      "update": [
+        {
+          "id": 1,
+          "price": 350,
+          "items_in_stock": 8
+        },
+        {
+          "id": 4,
+          "price": 500,
+          "items_in_stock": 5
+        }
+      ]
+    },
+    "expected": {
+      "offers": [
+        {
+          "product_id": 1,
+          "id": 1,
+          "price": 350,
+          "items_in_stock": 8
+        },
+        {
+          "product_id": 1,
+          "id": 2,
+          "price": 20,
+          "items_in_stock": 5
+        },
+        {
+          "product_id": 1,
+          "id": 3,
+          "price": 666,
+          "items_in_stock": 5
+        },
+        {
+          "product_id": 1,
+          "id": 4,
+          "price": 500,
+          "items_in_stock": 5
+        }
+      ]
+    }
+  },
+  "case_multiple_project_update": {
+    "payload": {
+      "products": [
+        {
+          "id": 1,
+          "name": "Benzinová sekačka Dosquarna",
+          "description": "Nejlepší sekačka na trhu. TLDR"
+        },
+        {
+          "id": 2,
+          "name": "Foo",
+          "description": "Lorem ipsum. TLDR"
+        },
+        {
+          "id": 3,
+          "name": "Bar",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        }
+      ],
+      "offers": [
+        {
+          "product_id": 1,
+          "id": 1,
+          "price": 666,
+          "items_in_stock": 8
+        },
+        {
+          "product_id": 2,
+          "id": 2,
+          "price": 2000,
+          "items_in_stock": 5
+        }
+      ],
+      "update": [
+        {
+          "product_id": 1,
+          "id": 1,
+          "price": 666,
+          "items_in_stock": 15
+        },
+        {
+          "product_id": 2,
+          "id": 2,
+          "price": 333,
+          "items_in_stock": 0
+        },
+        {
+          "product_id": 2,
+          "id": 3,
+          "price": 10000,
+          "items_in_stock": 1
+        },
+        {
+          "product_id": 3,
+          "id": 4,
+          "price": 1000,
+          "items_in_stock": 10
+        },
+        {
+          "product_id": 3,
+          "id": 10,
+          "price": 100000,
+          "items_in_stock": 8
+        },
+        {
+          "product_id": 10,
+          "id": 5,
+          "price": 2000,
+          "items_in_stock": 10
+        }
+      ]
+    },
+    "expected": {
+      "offers": [
+        {
+          "product_id": 1,
+          "id": 1,
+          "price": 666,
+          "items_in_stock": 15
+        },
+        {
+          "product_id": 2,
+          "id": 2,
+          "price": 333,
+          "items_in_stock": 0
+        },
+        {
+          "product_id": 2,
+          "id": 3,
+          "price": 10000,
+          "items_in_stock": 1
+        },
+        {
+          "product_id": 3,
+          "id": 4,
+          "price": 1000,
+          "items_in_stock": 10
+        },
+        {
+          "product_id": 3,
+          "id": 10,
+          "price": 100000,
+          "items_in_stock": 8
+        }
+      ]
+    }
+  }
+}
