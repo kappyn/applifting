@@ -19,6 +19,8 @@ services:
       context: .
       dockerfile: ./Dockerfile.test
     env_file: .env
+    volumes:
+      - .:/app
     ports:
       - 9000:9000
     environment:
