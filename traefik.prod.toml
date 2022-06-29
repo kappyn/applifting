@@ -1,0 +1,26 @@
+[entryPoints]
+  [entryPoints.api]
+    address = ":80"
+  [entryPoints.api.http]
+  [entryPoints.api.http.redirections]
+    [entryPoints.api.http.redirections.entryPoint]
+      to = "websecure"
+      scheme = "https"
+
+  [entryPoints.websecure]
+    address = ":443"
+
+[accessLog]
+
+[api]
+dashboard = true
+
+[providers]
+  [providers.docker]
+    exposedByDefault = false
+
+[certificatesResolvers.letsencrypt.acme]
+  email = ""
+  storage = "/certificates/acme.json"
+  [certificatesResolvers.letsencrypt.acme.httpChallenge]
+    entryPoint = "api"
