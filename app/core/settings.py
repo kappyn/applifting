@@ -16,6 +16,9 @@ class Settings(BaseConfig):
     OFFERS_REFRESH_DELAY_SECONDS: int = int(
         environ.get("OFFERS_REFRESH_DELAY_SECONDS", 60)
     )
+    OFFERS_TOKEN_LIFETIME_SECONDS: int = int(
+        environ.get("OFFERS_TOKEN_LIFETIME_SECONDS", 900)
+    )
     DB_ASYNC_CONNECTION_STR: str = environ.get("DB_ASYNC_CONNECTION_STR", "")
 
     logging.getLogger().setLevel(logging.DEBUG)

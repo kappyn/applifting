@@ -5,6 +5,7 @@ from typing import Dict, List
 import httpx
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi import status as http_status
+from fastapi_utils.tasks import repeat_every
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import SETTINGS

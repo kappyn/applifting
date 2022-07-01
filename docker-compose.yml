@@ -13,9 +13,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    # labels:
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.localhost`)"
 
   db:
     container_name: db
@@ -42,15 +42,15 @@ services:
         condition: service_healthy
     command: alembic upgrade head
 
-  # traefik:
-  #   container_name: traefik
-  #   image: traefik:v2.2
-  #   ports:
-  #     - 8008:80
-  #     - 8081:8080
-  #   volumes:
-  #     - "./traefik.toml:/etc/traefik/traefik.toml"
-  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  traefik:
+    container_name: traefik
+    image: traefik:v2.2
+    ports:
+      - 8008:80
+      - 8081:8080
+    volumes:
+      - "./traefik.toml:/etc/traefik/traefik.toml"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
       
 volumes:
   postgres_data:

@@ -24,6 +24,11 @@ async def periodic_offer_update():
     await offer_service.refresh_product_offers()
 
 
+@repeat_every(seconds=SETTINGS.OFFERS_TOKEN_LIFETIME_SECONDS)
+async def periodic_auth_token_renewal():
+    await offer_service.get_access_token()
+
+
 @app.on_event("startup")
 async def on_startup():
     await offer_service.get_access_token()
