@@ -23,7 +23,6 @@ class OfferService:
         self.client = httpx.AsyncClient(base_url=api_url)
         self.api_url = api_url
         self.access_token = None
-        self.session = None
 
     def get_auth_headers(self) -> Dict:
         return {"Bearer": self.access_token}
