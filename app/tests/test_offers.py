@@ -14,6 +14,10 @@ from app.products.crud import ProductCRUD
 async def test_offers_integration(
     async_client: AsyncClient, async_session: AsyncSession, test_data: dict
 ):
+    """
+    Tests offer and product integration as well as merging strategy when updates are fetched.
+    A mock offer update is "fetched" from the file (on production they're fetched externally).
+    """
     products_crud = ProductCRUD(session=async_session)
     offers_crud = OfferCRUD(session=async_session)
 
@@ -52,6 +56,7 @@ async def test_offers_integration(
 async def test_multiple_project_update(
     async_client: AsyncClient, async_session: AsyncSession, test_data: dict
 ):
+    """This test emulates having multiple registered products that are being updated."""
     products_crud = ProductCRUD(session=async_session)
     offers_crud = OfferCRUD(session=async_session)
 
@@ -90,5 +95,4 @@ async def test_multiple_project_update(
         key=attrgetter("id"),
     )
 
-    # breakpoint()
     assert results == expected
